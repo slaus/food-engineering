@@ -105,6 +105,65 @@
       }
     }
   }
+
+  & .news {
+    font-size: 14px;
+
+    & h3 {
+      margin-top: 0;
+    }
+
+    & small {
+      display: block;
+      margin-top: 5px;
+    }
+
+    & .more {
+      text-decoration: underline;
+    }
+  }
+
+  & .advantage {
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    display: flex;
+    margin: auto;
+
+    & .advantage-block {
+      display: inline-block;
+      width: 19%;
+      min-width: 200px;
+      box-sizing: border-box;
+      padding: 10px;
+
+      & h4 {
+        font-size: 16px;
+      }
+
+      & .hexagon {
+        position: relative;
+        display: inline-block;
+        width: 130px;
+        height: 135px;
+        background: url("../images/advantage.png") center center no-repeat;
+
+        & img {
+          position: absolute;
+          top: 25px;
+          left: 25px;
+        }
+      }
+    }
+  }
+
+  & .border-bottom {
+    display: table;
+    width: calc(100% - 30px);
+    margin: 0 auto;
+    height: 4px;
+    background: $blue-dark;
+  }
 }
 
 /* Sweep To Right */

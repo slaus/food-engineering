@@ -404,7 +404,6 @@ button.btn, a.btn {
   }
 }
 
-
 .center {
 
   @media  screen and (max-width: 767px) {
@@ -430,6 +429,7 @@ button.btn, a.btn {
   & h2 {
     font-size: 28px;
     font-weight: bold;
+    //border-bottom: none;
   }
 
   & h4 {
@@ -450,4 +450,6 @@ button.btn, a.btn {
     }
   }
 }
-
+ul li.hvr-sweep-to-right:hover a {
+  color: $white;
+}

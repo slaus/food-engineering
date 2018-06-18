@@ -2,4 +2,66 @@
  * Footer content
  */
 
-.footer {}
+.footer {
+  background: $grey;
+  
+  & .address {
+    position: relative;
+    padding-left: 25px;
+    font-size: 14px;
+
+    & .fa {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    
+    & a {
+      color: $white;
+    }
+  }
+
+  & .border-bottom {
+
+    &.white-color {
+      background: $grey-light;
+      display: table;
+      width: calc(100% - 30px);
+      margin: 0 auto;
+      height: 2px;
+      margin-bottom: 20px;
+    }
+  }
+
+  & .like {
+    font-size: 14px;
+
+    & img {
+      margin-left: 5px;
+    }
+
+    & .fa {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      background: $white;
+      border: 2px solid $black;
+      text-align: center;
+      border-radius: 50%;
+      color: $black;
+      line-height: 20px;
+      transition: .5s;
+      margin-left: 5px;
+      
+      &:hover {
+        color: $blue;
+        transition: .5s;
+        border-color: $blue;
+      }
+    }
+  }
+
+  .copyright {
+    font-size: 14px;
+  }
+}

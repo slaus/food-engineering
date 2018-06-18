@@ -90,7 +90,7 @@ $(function () {
 
 //Equal height
     $(function() {
-        $('.actual-block-item').matchHeight(
+        $('.item').matchHeight(
             {
                 byRow: true,
                 property: 'height',
