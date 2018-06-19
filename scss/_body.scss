@@ -9,6 +9,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 16px;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -426,14 +427,29 @@ button.btn, a.btn {
 
 .slider {
 
+  @media screen and (max-width: 599px) {
+    display: none;
+  }
+
   & h2 {
     font-size: 28px;
     font-weight: bold;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
     //border-bottom: none;
+
+    @media screen and (max-width: 991px) {
+      font-size: 18px;
+    }
   }
 
   & h4 {
     font-size: 16px;
+
+    @media screen and (max-width: 991px) {
+      font-size: 14px;
+    }
   }
 
   & .btn.btn-more {
@@ -443,6 +459,11 @@ button.btn, a.btn {
     margin-top: 50px;
     margin-bottom: 80px;
     transition: .5s;
+
+    @media screen and (max-width: 991px) {
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
     
     &:hover {
       background: $yellow;
@@ -450,6 +471,95 @@ button.btn, a.btn {
     }
   }
 }
+
 ul li.hvr-sweep-to-right:hover a {
   color: $white;
+}
+
+.input-group {
+  margin-bottom: 10px;
+}
+
+.login-box {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.modal-dialog {
+  width: 100%;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.menu {
+  background: $grey;
+  left: -250px; /* прячем меню */
+  height: 100%;
+  position: fixed;
+  width: 250px;
+  z-index: 999;
+}
+.menu ul {
+  border-top: 1px solid #555;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  border-bottom: 1px solid #555;
+  line-height: 34px;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  padding-top: 3px;
+  font-size: 14px;
+}
+
+.menu li:hover {
+  cursor: pointer;
+  background-color: #555;
+}
+
+.menu a {
+  color: #fff;
+  font-size: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.icon-close {
+  cursor: pointer;
+  padding-right: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  text-align: right;
+}
+
+.icon-menu {
+  color: $black;
+  cursor: pointer;
+  font-size: 20px;
+  padding-left: 5px;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &.menu-bottom {
+    padding-top: 3px;
+  }
+
+  & span {
+    vertical-align: middle;
+    display: inline-block;
+  }
+}
+
+.icon-menu img {
+  margin-right: 5px;
+}
+.plus {
+  color: $white;
+  float: right;
+  font-size: 20px;
+  margin-right: 10px;
 }

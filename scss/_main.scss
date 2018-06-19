@@ -4,6 +4,25 @@
 
 .main {
 
+  & .header-bg {
+    height: 180px;
+    overflow: hidden;
+
+    &.slider {
+      display: block;
+
+      & h2 {
+        font-size: 24px;
+        width: fit-content;
+        text-transform: uppercase;
+      }
+    }
+
+    & .carousel-caption {
+      top: 20px;
+    }
+  }
+
   & .actual-block {
     flex-wrap: wrap;
     flex-direction: row;
@@ -64,7 +83,7 @@
         }
       }
 
-      & .double-arrow{
+      & .double-arrow {
         position: absolute;
         left: 50px;
       }
@@ -164,6 +183,167 @@
     height: 4px;
     background: $blue-dark;
   }
+
+  & .catalogue {
+
+    &-block {
+      min-height: 285px;
+
+      @media screen and (max-width: 539px) {
+        width: 100%;
+        min-height: inherit;
+      }
+
+      &-item {
+        padding: 20px;
+        background: rgba(0, 0, 0, .5);
+
+        &:hover .catalogue-block-image {
+          border: 3px solid $white;
+          transition: .3s;
+        }
+      }
+
+      &-image {
+        display: block;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid $blue;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        text-align: center;
+        transition: .3s;
+
+        & img {
+          margin-left: 3px;
+          margin-top: 2px;
+        }
+      }
+
+      &-1 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-01.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-2 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-02.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-3 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-03.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-4 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-04.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-5 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-05.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-6 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-06.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-7 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-01.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-8 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-02.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-9 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-03.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-10 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-04.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-11 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-05.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-12 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-06.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-13 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-01.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-14 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-02.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-15 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-03.jpg") center center no-repeat;
+        background-size: cover;
+      }
+      &-16 {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: url("../images/catalogue-04.jpg") center center no-repeat;
+        background-size: cover;
+      }
+    }
+
+    & a {
+      color: $white;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
 }
 
 /* Sweep To Right */
@@ -179,6 +359,7 @@
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
+
 .hvr-sweep-to-right:before {
   content: "";
   position: absolute;
@@ -199,10 +380,35 @@
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
+
 .hvr-sweep-to-right:hover, .hvr-sweep-to-right:focus, .hvr-sweep-to-right:active {
   color: white;
 }
+
 .hvr-sweep-to-right:hover:before, .hvr-sweep-to-right:focus:before, .hvr-sweep-to-right:active:before {
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
+}
+
+.error {
+  padding: 5% 3% 1%;
+  background: $blue-light;
+
+  & img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  & .btn.btn-back {
+    background: $yellow;
+    border: 2px solid $yellow;
+    color: $black;
+    margin-top: 50px;
+    margin-bottom: 80px;
+    transition: .5s;
+
+    &:hover {
+      background: $white;
+    }
+  }
 }
