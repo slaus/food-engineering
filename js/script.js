@@ -89,7 +89,7 @@ $(function () {
         });
 
 //Equal height
-    $(function() {
+    $(function () {
         $('.item').matchHeight(
             {
                 byRow: true,
@@ -98,6 +98,50 @@ $(function () {
                 remove: false
             }
         );
+        $('.item h4').matchHeight(
+            {
+                byRow: true,
+                property: 'height',
+                target: null,
+                remove: false
+            }
+        );
+    });
+
+//Mobile Menu
+    $('.icon-menu.icon-menu-top').click(function () {
+        $('.menu.icon-menu-top').animate({
+            left: '0px'
+        }, 200);
+
+        $('body').animate({
+            left: '285px'
+        }, 200);
+    });
+
+    $('.icon-menu.icon-menu-bottom').click(function () {
+        $('.menu.icon-menu-bottom').animate({
+            left: '0px'
+        }, 200);
+
+        $('body').animate({
+            left: '250px'
+        }, 200);
+    });
+
+    $('.icon-close').click(function () {
+        $('.menu').animate({
+            left: '-250px'
+        }, 200);
+
+        $('body').animate({
+            left: '0px'
+        }, 200);
+    });
+
+    $(".plus").click(function (e) {
+        e.preventDefault();
+        $(this).next().show();
     });
 
 });
