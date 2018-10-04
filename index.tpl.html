@@ -1,0 +1,1111 @@
+{* главный файл-каркас шаблона магазина *}
+<!DOCTYPE html>
+<html lang="ru">
+{* подключение файла заголовков *}
+{include file="head.tpl.html"}
+
+{* сообщение о профилактике *}
+{if $smarty.const.CONF_SHOP_BILD eq 1 and $isadmin ne "yes"}
+<body style="background: none">
+<div id="wrap" style="background: none">
+    <div class="text-center build"><img src="data/{$smarty.const.TPL}/images/bild.gif" alt=""><br>
+        <h3><b>{$smarty.const.STRING_BILD}</b></h3>
+        <small>{$smarty.const.STRING_BILD_DES}
+            <br>E-mail:
+            <a href="mailto:{$smarty.const.CONF_GENERAL_EMAIL}" class="edit">{$smarty.const.CONF_GENERAL_EMAIL}</a>
+        </small>
+    </div>
+</div>
+{else}
+<body>
+<div class="menu icon-menu-top">
+
+    <!-- Иконка меню -->
+    <div class="icon-close">
+        <img src="data/{$smarty.const.TPL}/images/close-btn.png" alt="">
+    </div>
+
+    <!-- Меню -->
+    <ul class="mobile">
+        <li {if $main_content_template eq "home.tpl.html"} class="active"{/if}><a href="{$smarty.const.CONF_FULL_SHOP_URL}">Главная</a>
+        <li {if ($smarty.server.REQUEST_URI)=="/pages/o-kompanii.html" } class="active" {/if}><a href="{1|@fu_make_url_pages}">О компании</a>
+        <li {if $main_content_template eq "show_news.tpl.html"} class="active"{/if}><a href="{if $smarty.const.CONF_MOD_REWRITE eq 1}news.html{else}index.php?news=yes{/if}">Новости</a>
+        <li {if ($smarty.server.REQUEST_URI)=="/pages/oplata-i-dostavka.html" } class="active" {/if}><a href="{2|@fu_make_url_pages}">Оплата и доставка</a>
+        <li {if $main_content_template eq "feedback.tpl.html"} class="active"{/if}><a href="{if $smarty.const.CONF_MOD_REWRITE eq 1}feedback.html{else}index.php?feedback=yes{/if}">Контакты</a>
+    </ul>
+</div>
+
+<div class="menu icon-menu-bottom">
+
+    <!-- Иконка меню -->
+    <div class="icon-close">
+        <img src="data/{$smarty.const.TPL}/images/close-btn.png" alt="">
+    </div>
+
+    <!-- Меню -->
+    <ul class="mobile">
+        <li><a href="{3|@fu_make_url_pages}">Проектирование</a><span class="plus">+</span>
+            <ul class="submenu">
+                <li><a href="404.html"><span>Проектирование супермаркета (гипермаркета)</span></a></li>
+                <li><a href="404.html"><span>Проектирование предприятия общественного питания</span></a></li>
+                <li><a href="404.html"><span>Проектирование холодоснабжения</span></a></li>
+                <li><a href="404.html"><span>Проектирование систем вентиляции и кондиционирования</span></a></li>
+            </ul>
+        </li>
+        <li><a href="{4|@fu_make_url_pages}">Каталог</a><span class="plus">+</span>
+            <ul class="submenu">
+                <li><a href="404.html"><span>Оборудование для магазинов</span></a></li>
+                <li><a href="404.html"><span>Оборудование для пекарен и кондитерских цехов</span></a></li>
+                <li><a href="404.html"><span>Технологическое оборудование</span></a></li>
+                <li><a href="404.html"><span>Промышленный холод</span></a></li>
+                <li><a href="404.html"><span>Системы кондиционирования и вентиляции</span></a></li>
+                <li><a href="404.html"><span>Запчасти и комплектующие</span></a></li>
+            </ul>
+        </li>
+        <li><a href="{5|@fu_make_url_pages}">Типы предприятий</a><span class="plus">+</span>
+            <ul class="submenu type">
+                <li><a href="404.html"><span>Супермаркеты</span></a></li>
+                <li><a href="404.html"><span>Магазины у дома</span></a></li>
+                <li><a href="404.html"><span>Пекарни и кондитерские цеха</span></a></li>
+                <li><a href="404.html"><span>Бургерные</span></a></li>
+                <li><a href="404.html"><span>Пиццерии</span></a></li>
+                <li><a href="404.html"><span>Рестораны</span></a></li>
+                <li><a href="404.html"><span>Столовые</span></a></li>
+                <li><a href="404.html"><span>Фуд-траки</span></a></li>
+                <li><a href="404.html"><span>Кофейни</span></a></li>
+                <li><a href="404.html"><span>WOK-лапшичные</span></a></li>
+                <li><a href="404.html"><span>Бары и пабы</span></a></li>
+                <li><a href="404.html"><span>Фабрики-кухни</span></a></li>
+                <li><a href="404.html"><span>Отели, гостиницы, санатории</span></a></li>
+                <li><a href="404.html"><span>Овощехранилища</span></a></li>
+                <li><a href="404.html"><span>Мясные и рыбные цеха</span></a></li>
+                <li><a href="404.html"><span>Продовольственные рынки</span></a></li>
+            </ul>
+        </li>
+        <li><a href="{6|@fu_make_url_pages}">Монтаж и обслуживание</a></li>
+        <li><a href="">Акции</a></li>
+        <li><a href="{7|@fu_make_url_pages}">Нам доверяют</a></li>
+        <li><a href="{20|@fu_make_url_pages}">Производители</a></li>
+    </ul>
+</div>
+
+<div class="wrapper">
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 no-padding-left no-padding-right">
+                    <nav id="navbar-top" class="navbar-top">
+                        <div class="icon-menu icon-menu-top visible-sm visible-xs">
+                            <img src="data/{$smarty.const.TPL}/images/menu-ham-icon.png" alt="">
+                            <span>Меню</span>
+                        </div>
+                        <ul class="navbar-top-left hidden-sm hidden-xs">
+                            <li class='hvr-sweep-to-right {if $main_content_template eq "home.tpl.html"}active{/if}'><a href="{$smarty.const.CONF_FULL_SHOP_URL}">Главная</a>
+                            <li class='hvr-sweep-to-right {if ($smarty.server.REQUEST_URI)=="/pages/oplata-i-dostavka.html" }active{/if}'><a href="{1|@fu_make_url_pages}">О компании</a>
+                            <li class='hvr-sweep-to-right {if $main_content_template eq "show_news.tpl.html"}active{/if}'><a href="{if $smarty.const.CONF_MOD_REWRITE eq 1}news.html{else}index.php?news=yes{/if}">Новости</a>
+                            <li class='hvr-sweep-to-right {if ($smarty.server.REQUEST_URI)=="/pages/o-kompanii.html" }active{/if}'><a href="{2|@fu_make_url_pages}">Оплата и доставка</a></li>
+                            <li class='hvr-sweep-to-right {if $main_content_template eq "feedback.tpl.html"}active{/if}'><a href="{if $smarty.const.CONF_MOD_REWRITE eq 1}feedback.html{else}index.php?feedback=yes{/if}">Контакты</a>
+                        </ul>
+                        <ul class="navbar-top-right">
+                            <li><a href="" data-toggle="modal" data-target="#enter"><span class="hidden-xs">Вход\Регистрация </span><img
+                                    src="data/{$smarty.const.TPL}/images/icon-01.png" alt="Вход"></a>
+                            </li>
+                            <li><a {if $smarty.const.CONF_OPEN_SHOPPING_CART_IN_NEW_WINDOW eq 1}href="#" onclick="open_window('index.php?do=cart','{$smarty.const.CART_TITLE}'); return false" {else}href="{if $smarty.const.CONF_MOD_REWRITE eq 1}cart.html{else}index.php?shopping_cart=yes{/if}"{/if}><img src="data/{$smarty.const.TPL}/images/icon-02.png" alt="Корзина"></a><i>{$shopping_cart_items}</i></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="border-bottom"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-9 center search">
+                            <div>
+                                <a href="{$smarty.const.CONF_FULL_SHOP_URL}"><img src="data/{$smarty.const.TPL}/images/logo.png" class="logo"
+                                                                                  alt="Инжиниринг и оснащение предприятий торговли и питания"></a>
+                            </div>
+                            <div>
+                                <h1 class="visible-sm visible-xs">Профессиональное оборудование для супермаркетов,
+                                    пекарен, общепита, промышленный холод</h1>
+                            </div>
+                            <div class="search-block"><a href="tel:+78633101171"><img src="data/{$smarty.const.TPL}/images/icon-04.png"
+                                                                                      alt="">
+                                <small class="bold">+7 (863) 310-11-71</small>
+                            </a></div>
+                            <div class="search-block"><img src="data/{$smarty.const.TPL}/images/icon-05.png" alt="">
+                                <small class="bold">с 9 до 19 ежедневно</small>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 search">
+                            <div id="imaginary_container">
+                                <div class="input-group stylish-input-group center">
+                                    <form class="find" role="form" action="index.php" method="get" name="formpoisk" id="formpoisk">
+                                        <input name="searchstring" type="text" maxlength="128" class="form-control" placeholder="{$smarty.const.FIND_BUTTON_PL}">
+                                        <span class="input-group-addon">
+                                            <button type="submit"><img src="data/{$smarty.const.TPL}/images/icon-03.png" alt=""></button>
+                                        </span>
+                                        {section name=sert loop=$searchstrings}
+                                        <input type="hidden" name='search_string_{$smarty.section.sert.index}' value='{$searchstrings[sert]}'>
+                                        {/section}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom"></div>
+                <div class="col-xs-12 no-padding-left no-padding-right">
+                    <nav id="navbar-bottom" class="navbar-bottom">
+                        <div class="icon-menu icon-menu-bottom menu-bottom visible-sm visible-xs">
+                            <img src="data/{$smarty.const.TPL}/images/menu-ham-icon.png" alt="">
+                            <span>Услуги</span>
+                        </div>
+                        <ul class="navbar-bottom-left hidden-sm hidden-xs">
+                            <li class="hvr-sweep-to-right"><a href="{3|@fu_make_url_pages}">Проектирование</a>
+                                <ul class="submenu">
+                                    <li><a href=""><span>Проектирование супермаркета (гипермаркета)</span></a></li>
+                                    <li><a href=""><span>Проектирование предприятия общественного питания</span></a>
+                                    </li>
+                                    <li><a href=""><span>Проектирование холодоснабжения</span></a></li>
+                                    <li><a href=""><span>Проектирование систем вентиляции и кондиционирования</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="hvr-sweep-to-right"><a href="{4|@fu_make_url_pages}">Каталог</a>
+                                <ul class="submenu">
+                                    <li><a href=""><span>Оборудование для магазинов</span></a></li>
+                                    <li><a href=""><span>Оборудование для пекарен и кондитерских цехов</span></a></li>
+                                    <li><a href=""><span>Технологическое оборудование</span></a></li>
+                                    <li><a href=""><span>Промышленный холод</span></a></li>
+                                    <li><a href=""><span>Системы кондиционирования и вентиляции</span></a></li>
+                                    <li><a href=""><span>Запчасти и комплектующие</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="hvr-sweep-to-right"><a href="{5|@fu_make_url_pages}">Типы предприятий</a>
+                                <ul class="submenu type">
+                                    <li><a href=""><span class="type-1"></span><span
+                                            class="name">Супермаркеты</span></a></li>
+                                    <li><a href=""><span class="type-2"></span><span class="name">Магазины у дома</span></a></li>
+                                    <li><a href=""><span class="type-3"></span><span class="name">Пекарни и кондитерские цеха</span></a></li>
+                                    <li><a href=""><span class="type-4"></span><span class="name">Бургерные</span></a></li>
+                                    <li><a href=""><span class="type-5"></span><span class="name">Пиццерии</span></a></li>
+                                    <li><a href=""><span class="type-6"></span><span class="name">Рестораны</span></a></li>
+                                    <li><a href=""><span class="type-7"></span><span class="name">Столовые</span></a></li>
+                                    <li><a href=""><span class="type-8"></span><span class="name">Фуд-траки</span></a></li>
+                                    <li><a href=""><span class="type-9"></span><span class="name">Кофейни</span></a></li>
+                                    <!--<li><a href=""><span class="type-10"></span>Кафе кондитерские</a></li>-->
+                                    <li><a href=""><span class="type-11"></span><span class="name">WOK-лапшичные</span></a></li>
+                                    <li><a href=""><span class="type-12"></span><span class="name">Бары и пабы</span></a></li>
+                                    <li><a href=""><span class="type-13"></span><span class="name">Фабрики-кухни</span></a></li>
+                                    <li><a href=""><span class="type-14"></span><span class="name">Отели, гостиницы, санатории</span></a></li>
+                                    <li><a href=""><span class="type-15"></span><span class="name">Овощехранилища</span></a></li>
+                                    <li><a href=""><span class="type-16"></span><span class="name">Мясные и рыбные цеха</span></a></li>
+                                    <li><a href=""><span class="type-17"></span><span class="name">Продовольственные рынки</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="hvr-sweep-to-right"><a href="{6|@fu_make_url_pages}">Монтаж и обслуживание</a></li>
+                            <li class="hvr-sweep-to-right"><a href="">Акции</a></li>
+                            <li class="hvr-sweep-to-right"><a href="{7|@fu_make_url_pages}">Нам доверяют</a></li>
+                            <li class="hvr-sweep-to-right"><a href="{20|@fu_make_url_pages}">Производители</a></li>
+                        </ul>
+                        <ul class="navbar-bottom-right">
+                            <li class="active hvr-sweep-to-right"><a href="">Распродажа</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="container no-padding-left no-padding-right slider">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="data/{$smarty.const.TPL}/images/slider-01.jpg" alt="...">
+                        <div class="carousel-caption">
+                            <h2>Оборудование для пекарен и кондитерских цехов</h2>
+                            <h4>Настройка и обслуживание оборудования для пекарен и кондитерских</h4>
+                            <a href="" class="btn btn-more">Подробнее</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="data/{$smarty.const.TPL}/images/slider-01.jpg" alt="...">
+                        <div class="carousel-caption">
+                            <h2>Оборудование для пекарен и кондитерских цехов</h2>
+                            <h4>Настройка и обслуживание оборудования для пекарен и кондитерских</h4>
+                            <a href="" class="btn btn-more">Подробнее</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="data/{$smarty.const.TPL}/images/slider-01.jpg" alt="...">
+                        <div class="carousel-caption">
+                            <h2>Оборудование для пекарен и кондитерских цехов</h2>
+                            <h4>Настройка и обслуживание оборудования для пекарен и кондитерских</h4>
+                            <a href="" class="btn btn-more">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left white-color"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right white-color"></span>
+                </a>
+            </div> <!-- Carousel -->
+        </div>
+        <div class="container-fluid padding-top-30 padding-bottom-20">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 padding-bottom-30">
+                                <h2 class="bold text-uppercase title">Будущее - за профессионалами!</h2>
+                            </div>
+                            <div class="col-xs-12">
+                                <p>За годы своего существования компания приобрела огромный опыт сотрудничества с
+                                    крупнейшими заказчиками.</p>
+                                <p>Мы гарантируем Вам индивидуальный подход и профессиональное обслуживание на каждом этапе
+                                    реализации любого проекта!</p>
+                                <p>Доверяя нам будущее своего бизнеса, Вы приобретаете надежного партнера, способного
+                                    решить самые сложные технические задачи на любой стадии проекта — от этапа
+                                    проектирования до сервисного обслуживания.</p>
+                                <p><b>Наша цель — успешная долговременная работа Вашего предприятия.</b></p>
+
+                            </div>
+                            <div class="col-xs-12 actual-block padding-top-30">
+                                <a href="">
+                                    <div class="col-xs-12 col-sm-3 actual-block-item hvr-sweep-to-right">
+                                        <img src="data/{$smarty.const.TPL}/images/catalogue-01.jpg" class="img-responsive" alt="">
+                                        <h4 class="text-center bold">Оборудование для магазинов</h4>
+                                    </div>
+                                </a>
+                                <a href="">
+                                    <div class="col-xs-12 col-sm-3 actual-block-item hvr-sweep-to-right">
+                                        <img src="data/{$smarty.const.TPL}/images/catalogue-02.jpg" class="img-responsive" alt="">
+                                        <h4 class="text-center bold">Оборудование для пекарен и кондитерских цехов</h4>
+                                    </div>
+                                </a>
+                                <a href="">
+                                    <div class="col-xs-12 col-sm-3 actual-block-item hvr-sweep-to-right">
+                                        <img src="data/{$smarty.const.TPL}/images/catalogue-03.jpg" class="img-responsive" alt="">
+                                        <h4 class="text-center bold">Технологичское оборудование</h4>
+                                    </div>
+                                </a>
+                                <a href="">
+                                    <div class="col-xs-12 col-sm-3 actual-block-item hvr-sweep-to-right">
+                                        <img src="data/{$smarty.const.TPL}/images/catalogue-04.jpg" class="img-responsive" alt="">
+                                        <h4 class="text-center bold">Промышленный холод</h4>
+                                    </div>
+                                </a>
+                                <a href="">
+                                    <div class="col-xs-12 col-sm-3 actual-block-item hvr-sweep-to-right">
+                                        <img src="data/{$smarty.const.TPL}/images/catalogue-05.jpg" class="img-responsive" alt="">
+                                        <h4 class="text-center bold">Системы кондиционирования и вентиляции</h4>
+                                    </div>
+                                </a>
+                                <a href="">
+                                    <div class="col-xs-12 col-sm-3 actual-block-item hvr-sweep-to-right">
+                                        <img src="data/{$smarty.const.TPL}/images/catalogue-06.jpg" class="img-responsive" alt="">
+                                        <h4 class="text-center bold">Запчасти и комплектующие</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container padding-top-20 padding-bottom-30">
+            <div class="row">
+                <div class="col-xs-12 padding-bottom-30">
+                    <h2 class="bold text-uppercase title">Типы предприятий</h2>
+                </div>
+                <div class="col-xs-12">
+                    <div class="jcarousel-wrapper">
+                        <div class="jcarousel">
+                            <ul class="types">
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-17.png" alt="">
+                                        </div>
+                                        <h4>Супермаркеты</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-16.png" alt="">
+                                        </div>
+                                        <h4>Магазины</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-11.png" alt="">
+                                        </div>
+                                        <h4>Пекарни</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-13.png" alt="">
+                                        </div>
+                                        <h4>Бургерные</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-12.png" alt="">
+                                        </div>
+                                        <h4>Пиццерии</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-08.png" alt="">
+                                        </div>
+                                        <h4>Рестораны</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-10.png" alt="">
+                                        </div>
+                                        <h4>Столовые</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-15.png" alt="">
+                                        </div>
+                                        <h4>Фуд-траки</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-09.png" alt="">
+                                        </div>
+                                        <h4>Кофейни</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-14.png" alt="">
+                                        </div>
+                                        <h4>Лапшичные</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-07.png" alt="">
+                                        </div>
+                                        <h4>Бары</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-18.png" alt="">
+                                        </div>
+                                        <h4>Фабрики-кухни</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-06.png" alt="">
+                                        </div>
+                                        <h4>Отели</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-19.png" alt="">
+                                        </div>
+                                        <h4>Хранилища</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-20.png" alt="">
+                                        </div>
+                                        <h4>Цеха</h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <div class="triangle">
+                                            <svg width="90" height="69">
+                                                <polygon points="0,0 66,0 90,33 66,66 0,66" fill="#4682b4"
+                                                         stroke="#4682b4" stroke-width="0"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div class="double-arrow">
+                                            <img src="data/{$smarty.const.TPL}/images/double-arrow.png" alt="">
+                                        </div>
+                                        <div class="icon">
+                                            <img src="data/{$smarty.const.TPL}/images/icon-21.png" alt="">
+                                        </div>
+                                        <h4>Рынки</h4>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="jcarousel-control-prev"><i class="fa fa-chevron-left grey-color"></i></a>
+                        <a href="#" class="jcarousel-control-next"><i class="fa fa-chevron-right grey-color"></i></a>
+                        <!--<p class="jcarousel-pagination"></p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid padding-top-30 padding-bottom-20">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 news-block">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <h2 class="bold text-uppercase title">О компании</h2>
+                                            </div>
+                                            <div class="col-xs-12 scale animate">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <img src="data/{$smarty.const.TPL}/images/catalogue-02.jpg"
+                                                             class="img-responsive padding-bottom-20" alt="">
+                                                    </div>
+                                                    <div class="col-xs-12 padding-bottom-20">
+                                                        <p><b>FOOD ENGINEERING – объединяет в себе внимательных
+                                                            профессионалов
+                                                            в области магазиностроения, оснащения пищевых производств,
+                                                            промышленного холодильного и складского оборудования.</b></p>
+                                                        <p>При
+                                                            необходимости специалисты компании дадут грамотную консультацию
+                                                            по всему перечню поставляемого оборудования, а так же подберут
+                                                            оптимальный вариант подбора оборудования именно для вашей сферы
+                                                            деятельности с учетом индивидуальных особенностей.</p>
+                                                        <p>Основным принципом работы компании является комплексный подход.
+                                                            От проектирования объекта и поставки профессионального и
+                                                            технологического оборудования,до монтажа и дальнейшего
+                                                            сервисного обслуживания объекта.</p>
+                                                        <p>Мы имеем все необходимое для решения задач любой сложности.
+                                                            Мы постоянно обновляем ассортимент, включаем в него все
+                                                            технические новинки, в том числе энергосберегающее и экологичное
+                                                            оборудование.</p>
+                                                        <p>Перечень предлагаемого нами оборудования весь диапазон
+                                                            технических характеристик и цен. Мы предлагаем оборудование и
+                                                            запасные части, из Европы и Америки и России.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 padding-bottom-20 news">
+                                        <h2 class="bold text-uppercase title">Новости</h2>
+                                        <div class="row">
+                                            <div class="col-xs-12 padding-bottom-20 animate scale">
+                                                <div class="row">
+                                                    <div class="col-xs-3 col-md-4">
+                                                        <img src="data/{$smarty.const.TPL}/images/news-01.jpg" class="img-responsive"
+                                                             alt="">
+                                                    </div>
+                                                    <div class="col-xs-9 col-md-8 no-padding-left">
+                                                        <h3><a href="">Система FSS - Fast Service System от Coldline</a>
+                                                            <small class="bold">
+                                                                <i class="fa fa-clock-o blue-color"></i> 16.09.2018
+                                                            </small>
+                                                        </h3>
+                                                        Трансформация оборудования. Можно изменить назначение
+                                                        оборудования, преобразовывая холодильник в морозильник и
+                                                        наоборот, даже через несколько лет после монтажа...
+                                                        <a href="" class="text-right">
+                                                            <small class="more">Читать далее</small>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 padding-bottom-20 animate scale">
+                                                <div class="row">
+                                                    <div class="col-xs-3 col-md-4">
+                                                        <img src="data/{$smarty.const.TPL}/images/news-02.jpg" class="img-responsive"
+                                                             alt="">
+                                                    </div>
+                                                    <div class="col-xs-9 col-md-8 no-padding-left">
+                                                        <h3><a href="">Система FSS - Fast Service System от Coldline</a>
+                                                            <small class="bold">
+                                                                <i class="fa fa-clock-o blue-color"></i> 16.09.2018
+                                                            </small>
+                                                        </h3>
+                                                        Трансформация оборудования. Можно изменить назначение
+                                                        оборудования, преобразовывая холодильник в морозильник и
+                                                        наоборот, даже через несколько лет после монтажа...
+                                                        <a href="" class="text-right">
+                                                            <small class="more">Читать далее</small>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 padding-bottom-20 animate scale">
+                                                <div class="row">
+                                                    <div class="col-xs-3 col-md-4">
+                                                        <img src="data/{$smarty.const.TPL}/images/news-03.jpg" class="img-responsive"
+                                                             alt="">
+                                                    </div>
+                                                    <div class="col-xs-9 col-md-8 no-padding-left">
+                                                        <h3><a href="">Система FSS - Fast Service System от Coldline</a>
+                                                            <small class="bold">
+                                                                <i class="fa fa-clock-o blue-color"></i> 16.09.2018
+                                                            </small>
+                                                        </h3>
+                                                        Трансформация оборудования. Можно изменить назначение
+                                                        оборудования, преобразовывая холодильник в морозильник и
+                                                        наоборот, даже через несколько лет после монтажа...
+                                                        <a href="" class="text-right">
+                                                            <small class="more">Читать далее</small>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container padding-top-20 padding-bottom-30">
+            <div class="row">
+                <div class="col-xs-12 padding-bottom-30">
+                    <h2 class="bold text-uppercase title">Наши преимущества</h2>
+                </div>
+                <div class="col-xs-12 text-center advantage">
+                    <div class="advantage-block text-center animate scale">
+                        <div class="hexagon">
+                            <img src="data/{$smarty.const.TPL}/images/icon-22.png" alt="">
+                        </div>
+                        <h4 class="bold text-center">Прямые поставки от производителей</h4>
+                    </div>
+                    <div class="advantage-block text-center animate scale">
+                        <div class="hexagon">
+                            <img src="data/{$smarty.const.TPL}/images/icon-24.png" alt="">
+                        </div>
+                        <h4 class="bold text-center">Разумные цены и гибкая система скидок</h4>
+                    </div>
+                    <div class="advantage-block text-center animate scale">
+                        <div class="hexagon">
+                            <img src="data/{$smarty.const.TPL}/images/icon-26.png" alt="">
+                        </div>
+                        <h4 class="bold text-center">Индивидуальный подход к клиентам</h4>
+                    </div>
+                    <div class="advantage-block text-center animate scale">
+                        <div class="hexagon">
+                            <img src="data/{$smarty.const.TPL}/images/icon-25.png" alt="">
+                        </div>
+                        <h4 class="bold text-center">Оперативный подбор оборудования </h4>
+                    </div>
+                    <div class="advantage-block text-center animate scale">
+                        <div class="hexagon">
+                            <img src="data/{$smarty.const.TPL}/images/icon-23.png" alt="">
+                        </div>
+                        <h4 class="bold text-center">Оригинальные запчасти и гарантийный сервис</h4>
+                    </div>
+                    <div class="advantage-block text-center animate scale">
+                        <div class="hexagon">
+                            <img src="data/{$smarty.const.TPL}/images/icon-27.png" alt="">
+                        </div>
+                        <h4 class="bold text-center">Постоянным клиентам предоставляем отсрочки платежей</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="border-bottom"></div>
+                <div class="col-xs-12">
+                    <nav class="navbar-bottom bottom-menu hidden-xs hidden-sm hidden-md">
+                        <ul class="navbar-bottom-left">
+                            <li class="hvr-sweep-to-right"><a href="{3|@fu_make_url_pages}">Проектирование</a></li>
+                            <li class="hvr-sweep-to-right"><a href="{4|@fu_make_url_pages}">Каталог</a></li>
+                            <li class="hvr-sweep-to-right"><a href="{5|@fu_make_url_pages}">Типы предприятий</a></li>
+                            <li class="hvr-sweep-to-right"><a href="{6|@fu_make_url_pages}">Монтаж и обслуживание</a></li>
+                            <li class="hvr-sweep-to-right"><a href="">Акции</a></li>
+                            <li class="hvr-sweep-to-right"><a href="{7|@fu_make_url_pages}">Нам доверяют</a></li>
+                            <li class="hvr-sweep-to-right"><a href="{20|@fu_make_url_pages}">Производители</a></li>
+                        </ul>
+                        <ul class="navbar-bottom-right">
+                            <li class="active hvr-sweep-to-right"><a href="">Распродажа</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer padding-top-30">
+        <div class="container">
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-4 invert bold padding-bottom-20">
+                                    <div class="col-xs-12 col-sm-9 address">
+                                        <i class="fa fa-map-marker"></i>
+                                        ОФИС:<br>
+                                        344090, г. Ростов-на-Дону,
+                                        <span class="text-nowrap">ул. Малиновского 46а/27</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 invert bold padding-bottom-20">
+                                    <div class="col-xs-12 col-sm-9 address">
+                                        <i class="fa fa-map-marker"></i>
+                                        СКЛАД:<br>
+                                        ул. Доватора,150, территория
+                                        базы «Донагропромснаб»
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 invert bold padding-bottom-20">
+                                    <div class="col-xs-12 col-sm-9 address">
+                                        <i class="fa fa-phone"></i>
+                                        <a href="tel:+78632794534" class="animate">+7 (863) 279-45-34</a><br>
+                                        <a href="tel:+78633101171" class="animate">+7 (863) 310-11-71</a>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-9 address">
+                                        <i class="fa fa-envelope-open"></i>
+                                        <a href="mailto:info@interfut.ru" class="animate">info@interfut.ru</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-bottom white-color"></div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-12 invert bold">
+                                    <div class="col-xs-12 address padding-bottom-20">
+                                        ОБОРУДОВАНИЕ ПРОИЗВОДИТЕЛЕЙ: <a href="">Polair</a>, <a href="">Марихолодмаш</a>,
+                                        <a href="">Abat (Чувашторгтехника)</a>,
+                                        <a href="">Север</a>, <a href="">Polus</a>, <a href="">Hicold</a>, <a href="">Italfrost</a>,
+                                        <a href="">Pozis</a>, <a href="">Frostor</a>, <a href="">Frascold</a>, <a
+                                            href="">Danfoss</a>,
+                                        <a href="">Rada</a>, <a href="">Торгмаш</a>, <a href="">Атеси</a>, <a href="">Онега</a>,
+                                        <a href="">Новая Энергия</a>, <a href="">GRC</a>, <a href="">Hessen</a>, <a
+                                            href="">Восход</a>, <a href="">Проммаш</a>,
+                                        <a href="">HorecaIron</a>, <a href="">LAMEL</a>, <a href="">ТЕПЛОФ</a>.
+                                    </div>
+                                    <div class="col-xs-12 address padding-bottom-20">
+                                        Вы можете получить с бесплатной доставкой до региональных складов.
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-12 col-sm-4 bold padding-bottom-20">
+                                            <div class="address">
+                                                <i class="fa fa-map-marker"></i>
+                                                МОСКВА<br>
+                                                ЮАО, р «Царицыно», <span
+                                                    class="text-nowrap">ул. Промышленная д.11А,</span>
+                                                <span class="text-nowrap">тел: <a href="tel:+79289075396"
+                                                                                  class="animate">+7 (928) 907-53-96</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 bold padding-bottom-20">
+                                            <div class="address">
+                                                <i class="fa fa-map-marker"></i>
+                                                КРАСНОДАР<br>
+                                                г. Краснодар, <span class="text-nowrap">ул. Демуса, д. 13,</span>
+                                                <span class="text-nowrap">тел: <a href="tel:+79289075396"
+                                                                                  class="animate">+7 (928) 907-53-96</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 bold padding-bottom-20">
+                                            <div class="address">
+                                                <i class="fa fa-map-marker"></i>
+                                                ПЯТИГОРСК<br>
+                                                г. Пятигорск, <span class="text-nowrap">Кисловодское шоссе, 30,</span>
+                                                <span class="text-nowrap">тел: <a href="tel:+79289075396"
+                                                                                  class="animate">+7 (928) 907-53-96</a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-12 col-sm-4 bold padding-bottom-20">
+                                            <div class="address">
+                                                <i class="fa fa-map-marker"></i>
+                                                ВОЛГОГРАД<br>
+                                                г. Волгоград, <span class="text-nowrap">проезд Тайшетский, д. 10,</span>
+                                                <span class="text-nowrap">тел: <a href="tel:+79289075396"
+                                                                                  class="animate">+7 (928) 907-53-96</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 bold padding-bottom-20">
+                                            <div class="address">
+                                                <i class="fa fa-map-marker"></i>
+                                                РОСТОВ-НА-ДОНУ<br>
+                                                г. Ростов-на-Дону, <span class="text-nowrap">пер. Нефтяной, д. 1,</span>
+                                                <span class="text-nowrap">тел: <a href="tel:+79289075396"
+                                                                                  class="animate">+7 (928) 907-53-96</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 bold padding-bottom-20">
+                                            <div class="address">
+                                                <i class="fa fa-map-marker"></i>
+                                                СИМФЕРОПОЛЬ<br>
+                                                г. Симферополь, <span class="text-nowrap">ул. Луговая, д. 6, </span>
+                                                <span class="text-nowrap">тел: <a href="tel:+79289075396"
+                                                                                  class="animate">+7 (928) 907-53-96</a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom white-color"></div>
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12 invert bold">
+                                        <div class="col-xs-12 col-sm-6 like padding-bottom-20">
+                                            Принимаем к оплате: <img src="data/{$smarty.const.TPL}/images/credit.png" alt="">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 like padding-bottom-20 text-right">
+                                            Поделиться в соцсетях:
+                                            <a href=""><i class="fa fa-google-plus animate scale"></i></a>
+                                            <a href=""><i class="fa fa-twitter animate scale"></i></a>
+                                            <a href=""><i class="fa fa-vk animate scale"></i></a>
+                                            <a href=""><i class="fa fa-facebook animate scale"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid white-color">
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 padding-top-20 padding-bottom-20 text-center copyright">
+                            <p>* Указан стандартный срок поставки при условии наличия товара на складе
+                                производителя, точный срок с учетом загрузки транспортного флота компании, наличия на складах, вы
+                                можете узнать у своего менеджера.<br>
+                                Интернет ресурс носит исключительно информационный характер и не является публичной
+                                офертой, определяемой положениями ст. 437 Гражданского кодекса РФ.</p>
+                            <p><a href="{8|@fu_make_url_pages}">Пользовательское соглашение</a> | <a href="{9|@fu_make_url_pages}">Политика конфиденциальности</a></p>
+                            <p>Все права защищены © 2011-{php}echo date('Y');{/php}. Разработка сайта <a href="https://xwork.site"
+                                                                                                         target="_blank">xWork</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a id="back-to-top" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="enter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        <i class="fa fa-times"></i>
+                    </span>
+                </button>
+                {* шаблон блока авторизации *}
+
+                <div class="grey-light-color auth">
+                    <div class="row">
+                        <div class="col-xs-12 text-center padding-top-20 padding-bottom-30">
+                            <img src="data/{$smarty.const.TPL}/images/logo.png" class="logo" alt="">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 login-box">
+                            {if $log ne ""}
+                            <div class="row" style="line-height:25px;margin-left:calc(50% - 95px);">
+                                {if $isadmin eq "yes"}
+                                <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;
+                                <a href="{$smarty.const.ADMIN_FILE}">{$smarty.const.ADMINISTRATE_LINK}</a>
+                                <br> {/if}
+                                <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;
+                                <a href='index.php?contact_info=yes'>{$smarty.const.STRING_CONTACT_INFORMATION_DOWN_CASE}</a>
+                                <br>
+                                <span class="glyphicon glyphicon-book"></span>&nbsp;&nbsp;
+                                <a href='index.php?address_book=yes'>{$smarty.const.STRING_ADDRESS_BOOK}</a>
+                                <br>
+                                <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;
+                                <a href='index.php?order_history=yes'>{$smarty.const.STRING_ORDER_HISTORY}</a>
+                                <br>
+                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;
+                                <a href='index.php?visit_history=yes'>{$smarty.const.STRING_VISIT_HISTORY}</a>
+                                {if $smarty.const.CONF_AFFILIATE_PROGRAM_ENABLED}
+                                <br>
+                                <span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;
+                                <a href='index.php?affiliate=yes&amp;sub=balance'>{$smarty.const.STRING_AFFILIATE_PROGRAM}</a>
+                                {/if}
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                    <button onclick="window.location.href='index.php?logout=yes'" class="btn btn-primary animate">
+                                        <i class="fa fa-ban"></i>{$smarty.const.LOGOUT_LINK}</button>
+                                </div>
+                            </div>
+                            {else}
+                            <form action="index.php" method="post" id="userform" role="form">
+                                <div class="row">
+                                    <div class="input-group m-b-10">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                                        <input type="text" class="form-control" name="user_login" id="user_login" placeholder="{$smarty.const.CUSTOMER_LOGIN}" required="">
+                                    </div>
+                                    <div class="input-group m-b-10">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                                        <input type="password" class="form-control" name="user_pw" id="user_pw" placeholder="{$smarty.const.CUSTOMER_PASSWORD}" required="">
+                                    </div>
+                                    {if $smarty.const.CONF_USER_SYSTEM > 0}
+                                    <div class="text-center">
+                                        <a href="index.php?logging=yes">Забыли свой пароль?</a>
+                                    </div>
+                                    <div class="text-center">У вас нет аккаунта?
+                                        <a href="index.php?register=yes">{$smarty.const.REGISTER_LINK}</a>
+                                    </div>
+                                    {/if}
+                                    <input type="hidden" name="enter" value="1">
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                        <button type="submit" class="btn btn-primary animate">
+                                            <i class="fa fa-key"></i>{$smarty.const.BUTTON_ENTER_AUTH}</button>
+                                    </div>
+                                </div>
+                            </form>
+                            {/if}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{/if}
+
+<script src="data/{$smarty.const.TPL}/js/jquery.js"></script>
+<script src="data/{$smarty.const.TPL}/js/bootstrap.js"></script>
+<script src="data/{$smarty.const.TPL}/js/jquery.jcarousel.min.js"></script>
+<script src="data/{$smarty.const.TPL}/js/jquery.matchHeight-min.js"></script>
+<script src="data/{$smarty.const.TPL}/js/script.js"></script>
+<script>
+    {literal}
+    $(document).ready(function() {
+        $('.carousel').carousel();
+        $('[data-toggle=tooltip]').tooltip();
+        $('.scroll-top').on('click', function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop:0}, '600');
+        });
+    });
+    function adjustModalMaxHeightAndPosition(){
+        $('.modal').each(function(){
+            if($(this).hasClass('in') == false){
+                $(this).show();
+            };
+            var contentHeight = $(window).height() - 60;
+            var headerHeight = $(this).find('.modal-header').outerHeight() || 2;
+            var footerHeight = $(this).find('.modal-footer').outerHeight() || 2;
+
+            $(this).find('.modal-content').css({
+                'max-height': function () {
+                    return contentHeight;
+                }
+            });
+
+            $(this).find('.modal-body').css({
+                'max-height': function () {
+                    return contentHeight - (headerHeight + footerHeight);
+                }
+            });
+
+            $(this).find('.modal-dialog').addClass('modal-dialog-center').css({
+                'margin-top': function () {
+                    return -($(this).outerHeight() / 2);
+                },
+                'margin-left': function () {
+                    return -($(this).outerWidth() / 2);
+                }
+            });
+            if($(this).hasClass('in') == false){
+                $(this).hide();
+            };
+        });
+    };
+    if ($(window).height() >= 320){
+        $(window).resize(adjustModalMaxHeightAndPosition).trigger("resize");
+    }
+    {/literal}
+</script>
+</body>
+</html>
